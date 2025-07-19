@@ -25,7 +25,15 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        const updated = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        // Whitelist the fields that can be updated
+        const allowedUpdates = ['status', 'items', 'customer', 'total', 'shippingAddress', 'billingAddress']; // adjust fields as appropriate
+        const updates = {};
+        for (const key of allowedUpdates) {
+            if (req.body.hasOwnProperty(key)) {
+                updates[key] = req.body[key];
+            }
+        }
+        const updated = await Order.findByIdAndUpdate(req.params.id, { $set: updates }, { new: true });
         if (!updated) return res.status(404).json({ message: 'Order not found' });
         res.json(updated);
     } catch (err) { next(err); }
