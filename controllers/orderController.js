@@ -33,7 +33,7 @@ exports.update = async (req, res, next) => {
                 updates[key] = req.body[key];
             }
         }
-        const updated = await Order.findByIdAndUpdate(req.params.id, updates, { new: true });
+        const updated = await Order.findByIdAndUpdate(req.params.id, { $set: updates }, { new: true });
         if (!updated) return res.status(404).json({ message: 'Order not found' });
         res.json(updated);
     } catch (err) { next(err); }
