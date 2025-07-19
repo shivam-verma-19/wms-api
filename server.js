@@ -20,7 +20,7 @@ app.use('/api/inventory', inventoryRoutes);
 app.use('/api/orders', orderRoutes);
 
 // Health check
-app.get('/', (req, res) => {
+app.get('/', (res) => {
     res.send({ message: 'WMS API is running' });
 });
 

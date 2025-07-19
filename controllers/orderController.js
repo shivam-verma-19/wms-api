@@ -1,6 +1,6 @@
 const Order = require('../models/Order');
 
-exports.getAll = async (req, res, next) => {
+exports.getAll = async (res, next) => {
     try {
         const orders = await Order.find();
         res.json(orders);

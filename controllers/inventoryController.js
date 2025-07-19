@@ -1,6 +1,6 @@
 const Inventory = require('../models/Inventory');
 
-exports.getAll = async (req, res, next) => {
+exports.getAll = async (res, next) => {
     try {
         const items = await Inventory.find();
         res.json(items);

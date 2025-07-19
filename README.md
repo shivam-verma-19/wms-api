@@ -8,7 +8,6 @@ A RESTful API built with Node.js, Express, and MongoDB to manage **Inventory** a
 - MongoDB (Mongoose)
 - express-validator (input validation)
 - Morgan (logging)
-- Layered architecture
 
 ## 📌 Endpoints
 
@@ -28,9 +27,8 @@ A RESTful API built with Node.js, Express, and MongoDB to manage **Inventory** a
 ## ⚡ Running locally
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/shivam-verma-19/wms-api.git
 cd wms-api
 npm install
-cp .env.example .env
 npm run dev
 ```
