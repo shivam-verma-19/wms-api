@@ -12,8 +12,15 @@ const deleteLimiter = rateLimit({
     message: "Too many delete requests from this IP, please try again later."
 });
 
+// Apply rate limiting to GET /:id requests (e.g., max 100 per 15 minutes per IP)
+const getOneLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: "Too many requests to this endpoint, please try again later."
+});
+
 router.get('/', ctrl.getAll);
-router.get('/:id', ctrl.getOne);
+router.get('/:id', getOneLimiter, ctrl.getOne);
 router.post(
     '/',
     [
