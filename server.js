@@ -6,6 +6,9 @@ const connectDB = require('./config/db');
 const inventoryRoutes = require('./routes/inventoryRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const errorHandler = require('./middlewares/errorHandler');
+const logger = require('./utils/logger');
+
+logger.info('Server starting...');
 
 const app = express();
 app.use(cors());
