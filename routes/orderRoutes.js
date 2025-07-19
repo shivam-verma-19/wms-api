@@ -19,7 +19,14 @@ const getOneLimiter = rateLimit({
     message: "Too many requests to this endpoint, please try again later."
 });
 
-router.get('/', ctrl.getAll);
+// Apply rate limiting to GET / requests (e.g., max 100 per 15 minutes per IP)
+const getAllLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: "Too many requests to this endpoint, please try again later."
+});
+
+router.get('/', getAllLimiter, ctrl.getAll);
 router.get('/:id', getOneLimiter, ctrl.getOne);
 router.post(
     '/',
