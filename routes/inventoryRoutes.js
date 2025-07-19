@@ -19,7 +19,7 @@ const limiter = RateLimit({
     max: 100, // limit each IP to 100 requests per windowMs
 });
 
-router.get('/', ctrl.getAll);
+router.get('/', limiter, ctrl.getAll);
 router.get('/:id', limiter, ctrl.getOne);
 router.post(
     '/',
