@@ -32,7 +32,7 @@ router.post(
     validateRequest,
     ctrl.create
 );
-router.put('/:id', ctrl.update);
+router.put('/:id', limiter, ctrl.update);
 router.delete('/:id', deleteLimiter, ctrl.remove);
 
 module.exports = router;
