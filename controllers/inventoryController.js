@@ -25,7 +25,12 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        const updated = await Inventory.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const allowedFields = ['name', 'quantity', 'price']; // Replace with actual allowed fields
+        const sanitizedBody = {};
+        for (const key of allowedFields) {
+            if (req.body[key] !== undefined) sanitizedBody[key] = req.body[key];
+        }
+        const updated = await Inventory.findByIdAndUpdate(req.params.id, sanitizedBody, { new: true });
         if (!updated) return res.status(404).json({ message: 'Item not found' });
         res.json(updated);
     } catch (err) { next(err); }
